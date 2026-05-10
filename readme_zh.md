@@ -1,6 +1,6 @@
 # BLADE-LM
 
-[English](./README.md) | 中文
+[English](./readme.md) | 中文
 
 **B**lock-Level **A**utoregressive **D**iffusion with Causal Discov**E**ry
 
