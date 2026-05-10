@@ -1,5 +1,7 @@
 # BLADE-LM
 
+[Hugging Face](https://huggingface.co/Hengzongshu/BLADE-LM)
+
 [中文](readme_zh.md) | English
 
 **B**lock-Level **A**utoregressive **D**iffusion with Causal Discov**E**ry
