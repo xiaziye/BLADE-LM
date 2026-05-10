@@ -1,0 +1,59 @@
+# BLADE Configuration
+# All paths are relative to project root unless absolute.
+
+model:
+  base_model:  "./base_model"       # base model directory (e.g. Qwen2.5-0.5B)
+  output_dir:  "./BLADE-v1"         # trained model save directory
+
+sequence:
+  seq_len:    1024
+  num_blocks: 128                   # block_size = seq_len / num_blocks = 8
+
+data:
+  cache_dir: "./cache"
+  sources:
+    - name_tag:    "math"
+      path:        "./data/math_train.jsonl"   # local JSONL
+      text_field:  "problem,solution"          # concat two fields
+      weight:      3
+    - name_tag:    "stackexchange"
+      hf_name:     "math-ai/StackMathQA"       # HuggingFace dataset
+      hf_split:    "train"
+      text_field:  "Q,A"
+      weight:      5
+    - name_tag:    "causal"
+      path:        "./data/causal_train.jsonl"
+      text_field:  "text"
+      weight:      2
+
+train:
+  total_steps:    40000
+  batch_size:     16
+  grad_accum:     2
+  lr:             2e-5
+  weight_decay:   0.01
+  max_grad_norm:  1.0
+  warmup_steps:   250
+  num_workers:    4
+  ckpt_dir:       "./ckpt"
+  log_dir:        "./logs"
+  log_every:      50
+  save_every:     2500
+  keep_ckpts:     3
+  save_optimizer: false
+  resume:         ""                # path to checkpoint to resume from
+
+loss:
+  alpha:        0.05                # AR loss weight
+  lambda_intra: 0.1                 # intra-block diversity weight
+
+generate:
+  beta:       0.7                   # AR/Diff mix ratio (0=pure Diff, 1=pure AR)
+  max_tokens: 500
+  seq_len:    1024                  # should match training, must be a multiple of block_size.
+  num_blocks: 128                   # should match training
+
+causal:
+  min_gap:    3                     # minimum block distance for causal edges
+  topk:       15                    # number of top edges to display
+  block_size: 8                     # should match seq_len / num_blocks

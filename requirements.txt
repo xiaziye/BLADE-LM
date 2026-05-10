@@ -1,0 +1,21 @@
+# Core
+torch>=2.0.0
+transformers>=4.40.0
+tokenizers>=0.19.0
+safetensors>=0.4.0
+accelerate>=0.27.0
+
+# Data
+datasets>=2.0.0
+numpy>=1.24.0
+PyYAML>=6.0
+
+# Training (optional)
+bitsandbytes>=0.41.0    # 8-bit optimizer, recommended for training
+
+# Visualization (optional)
+matplotlib>=3.7.0       # causal heatmap
+
+# Utilities
+tqdm>=4.65.0
+huggingface_hub>=0.20.0
